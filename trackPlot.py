@@ -26,7 +26,7 @@ def getXnPlusOne(xn, alpha, vn, h):
 
 
 def getVnPlusOne(vn, alpha, h):
-    return vn + (h*5*sin(alpha)/7)
+    return vn + (h*g*(5/7)*sin(alpha))
 
 
 def getTnPlusK(tn, h, k=1):
@@ -64,5 +64,5 @@ for i in range(numOfSteps):
     t[i] = t_next
 
 
-plt.plot(x, v)
+plt.plot(t, v)
 plt.show()
