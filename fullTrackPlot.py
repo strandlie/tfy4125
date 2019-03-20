@@ -13,7 +13,9 @@ y = data[:, 2:]     # All rows, third column
 
 
 plt.plot(t, y)
-plt.plot(t, getHeight(t))
+plt.xlabel('Tid')
+plt.ylabel('Høyde')
+#plt.plot(t, getHeight(t))
 plt.show()
 
 
