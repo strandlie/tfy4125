@@ -36,6 +36,7 @@ def getNnPlusOne(nn, alpha, velocity, radius, d2ydx2):
     elif d2ydx2 < 0:
         return ((g * cos(alpha)) - ((velocity ** 2) / radius))
 
+x0 = -0.585
 
 trv = tv.trvalues(p, x0)
 
@@ -44,7 +45,6 @@ radius = trv[di["R"]]
 d2ydx2 = trv[di["d2ydx2"]]
 
 
-x0 = -0.585
 v0 = 0
 t0 = 0
 a0 = 0
