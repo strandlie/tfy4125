@@ -12,8 +12,11 @@ x = data[:, 1:2]    # A.pyplotll rows, second column
 y = data[:, 2:]     # All rows, third column
 
 
-plt.plot(t, y)
-plt.plot(t, getHeight(t))
+plt.plot(t, y, label="Måling fra eksperiment")
+plt.plot(t, getHeight(t), label="Relativ energi")
+plt.xlabel("Tid")
+plt.ylabel("Høyde")
+plt.legend()
 plt.show()
 
 
