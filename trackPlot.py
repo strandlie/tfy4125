@@ -4,7 +4,9 @@ import matplotlib.pyplot as plt
 import numpy as np
 from math import cos, sin
 
-p = it.iptrack("/Users/camillamariedalan/Documents/NTNU/6.Vaar19/Fysikk/rapport_kode/tfy4125/Trackerfiler/bane.txt")
+plt.rcParams.update({'font.size': 15})
+
+p = it.iptrack("/Users/hstrandlie/Documents/NTNU/Fysikk/Lab/Eclipse/Numerikk/Trackerfiler/bane.txt")
 g = 9.81
 numOfSteps = 200
 h = (1.08)/numOfSteps
@@ -101,16 +103,30 @@ def numericalCalc():
         n[i] = n_next
         a[i] = a_next
 
-
-    plt.plot(x, f)
+    y_color = "darkorange"
+        
+    fig, ax1 = plt.subplots()
+    ax1.plot(x, f)
     plt.xlabel('X-posisjon')
-    plt.ylabel('Friksjon per masse')
+    plt.ylabel('Friksjon per masse', color='b')
+    
+    ax2 = ax1.twinx()
+    ax2.plot(x, y, y_color)
+    ax2.set_ylabel("Y-posisjon", color=y_color)
+    fig.tight_layout()
 
     plt.figure()
-    plt.plot(x, n)
+    fig, ax1 = plt.subplots()
+    ax1.plot(x, n)
     plt.xlabel('X-posisjon')
-    plt.ylabel('Normalkraft per masse')
-
+    plt.ylabel('Normalkraft per masse', color='b')
+   
+    ax2 = ax1.twinx()
+    ax2.plot(x, y, y_color)
+    ax2.set_ylabel("Y-posisjon", color=y_color)
+    fig.tight_layout()
+    
+    """
     plt.figure()
     plt.plot(x, y)
     plt.xlabel('X-posisjon')
@@ -126,9 +142,9 @@ def numericalCalc():
     plt.plot(x, a)
     plt.xlabel('X-posisjon')
     plt.ylabel('Akselerasjon')
-
+    """
+    
     plt.show()
-
 
 
 if __name__ == '__main__':
