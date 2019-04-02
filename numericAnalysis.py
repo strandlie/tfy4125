@@ -5,6 +5,8 @@ import numpy as np
 from math import cos, sin
 
 
+plt.rcParams.update({'font.size': 15})
+
 def getXnPlusOne(xn, alpha, vn, h):
     return xn + (h*vn*cos(alpha))
 
@@ -25,7 +27,7 @@ t0 = 0
 t_end = float(numOfSteps) / 100
 h = (t_end - t0)/numOfSteps
 
-x_right = 0.629
+x_right = 0.62898
 
 
 
@@ -68,29 +70,40 @@ for i in range(numOfSteps):
     v_old = v_new
 
 
-"""
-plt.plot(t, x)
-plt.xlabel("Tid")
-plt.ylabel("Hastighet")
-plt.show()
 
-
-# COMPARE NUMERICS WITH EXPERIMENTAL. TODO: Has a bug, in that it doesn't start at the same y-value. 
-"""
+# COMPARE NUMERICS WITH EXPERIMENTAL.
 fullData = np.loadtxt("/Users/hstrandlie/Documents/NTNU/Fysikk/Lab/Lab3/Trackerfiler/fulltrack.txt", skiprows=2)
 full_t = fullData[:numOfSteps + 1, :1]
 full_x = fullData[:numOfSteps + 1, 1:2]
 full_y = fullData[:numOfSteps + 1, 2:]
 
-for i in range(len(y)):
-    txy = "t[" + str(i) + "]:" + str(t[i]) + "\t\t x[" + str(i) + "]: " + str(x[i]) + "\t\t y[" + str(i) + "]: " + str(y[i])
-    full_txy = "\t\t full_t[" + str(i) + "]:" + str(full_t[i]) + "\t\t full_x[" + str(i) + "]: " + str(full_x[i]) + "\t\t full_y[" + str(i) + "]: " + str(full_y[i])
+# COMPUTE VELOCITY
+"""
+full_v = np.empty(0)
+full_v = np.append(full_v, [0])
+ 
+for i in range(len(full_t) - 1):
     
-    print(txy + full_txy)
+    pos_nPlusOne = np.array([full_x[i+1], full_y[i+1]])
+    pos_n = np.array([full_x[i], full_y[i]])
+
+    delta_pos = np.linalg.norm(pos_nPlusOne - pos_n)
+    
+    delta_t = full_t[i+1] - full_t[i]
+    
+    full_v = np.append(full_v, (-1)*delta_pos / delta_t)
+    
+plt.plot(t, v, label="Numerisk")
+plt.plot(full_t, full_v, label="Eksperimental")
+plt.xlabel("Tid [s]")
+plt.ylabel("Hastighet")
+plt.legend()
+plt.show()
+"""
 
 plt.plot(t, y, label="Numerisk")
 plt.plot(full_t, full_y, label="Eksperimental")
-plt.xlabel("Tid")
-plt.ylabel("Y-posisjon")
+plt.xlabel("Tid [s]")
+plt.ylabel("Y-posisjon [m]")
 plt.legend()
 plt.show()
